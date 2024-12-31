@@ -5,7 +5,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "My Simple SFML Project");
 
     sf::Texture text;
-    text.loadFromFile("1.jpg");
+    text.loadFromFile("res/img/nose.png");
 
     sf::Sprite spr;
     spr.setTexture(text);

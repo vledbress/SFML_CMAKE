@@ -1,6 +1,8 @@
 @echo off
-rem Сначала создаём проект
+if exist build (
+    rmdir /s /q build
+)
+mkdir build
 cd build
 cmake ..
-rem Затем строим проект в конфигурации Release
 cmake --build . --config Release
