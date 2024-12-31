@@ -1,4 +1,5 @@
-#include <SFML/Graphics.hpp>
+#include "../inc/header.h"
+
 
 int main()
 {
