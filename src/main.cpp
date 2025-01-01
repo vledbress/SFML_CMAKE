@@ -22,6 +22,9 @@ int main()
         window.clear();
         window.draw(spr);
         window.display();
+
+
+        ////
     }
 
     return 0;
