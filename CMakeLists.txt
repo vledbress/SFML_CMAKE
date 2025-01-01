@@ -10,21 +10,17 @@ set(SFML_LIB_DIR "libs/sfml/lib")
 include_directories(${SFML_INCLUDE_DIR})
 link_directories(${SFML_LIB_DIR})
 
-# Указываем исходники и заголовочные файлы
-aux_source_directory(src SRC_DIR)
+# Указываем исходники
+file(GLOB SRC_FILES "src/*.cpp")
 
-set(HEADER_FILES
-    inc/header.h
-)
+# Указываем заголовочные файлы (возможно, они находятся в папке inc)
+file(GLOB HEADER_FILES "inc/*.h")
 
 # Добавляем исполняемый файл
-add_executable(MySimpleSFMLProject ${SRC_DIR} ${HEADER_FILES})
+add_executable(MySimpleSFMLProject ${SRC_FILES} ${HEADER_FILES})
 
 # Подключаем библиотеки SFML
 target_link_libraries(MySimpleSFMLProject sfml-graphics sfml-window sfml-system)
-
-# Указываем папку с заголовками для компиляции
-target_include_directories(MySimpleSFMLProject PRIVATE ${CMAKE_SOURCE_DIR}/inc)
 
 # Копируем папку res сначала в build, а затем в build/Release
 add_custom_command(

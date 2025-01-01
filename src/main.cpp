@@ -1,28 +1,23 @@
-#include "../inc/header.h"
+#include "../inc/Screen.h"
+#include "../inc/Image.h"
 
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My Simple SFML Project");
+int main() {
+    
+    Screen screen(consts::WIDTH, consts::HEIGHT);
+    screen.setFps(consts::FPS);
 
-    sf::Texture text;
-    text.loadFromFile("res/img/nose.png");
+    screen.regCallBack(sf::Event::Closed, [&](sf::Event e) {
+        screen.window().close();
+    });
+    
+    Image img(50, 50, 300, 300, "res/img/ilka.jpg");
 
-    sf::Sprite spr;
-    spr.setTexture(text);
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(spr);
-        window.display();
+    while (screen.isOpen()) {
+        screen.processEvents();
+        screen.window().clear(sf::Color::White);
+        img.draw(screen);
+        screen.window().display();
     }
-
     return 0;
 }
