@@ -14,7 +14,10 @@ link_directories(${SFML_LIB_DIR})
 aux_source_directory(src SRC_DIR)
 
 set(HEADER_FILES
-    inc/header.h
+    inc/Image.h
+    inc/Screen.h
+    inc/Consts.h
+    inc/Text.h
 )
 
 # Добавляем исполняемый файл

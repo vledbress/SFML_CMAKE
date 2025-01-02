@@ -1,31 +1,40 @@
-#include "../inc/header.h"
+#include "../inc/Screen.h"
+#include "../inc/Image.h"
+#include "../inc/Text.h"
+#include "../inc/Button.h"
+#include <iostream>
 
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My Simple SFML Project");
+int main() {
+    
+    Screen screen(consts::WIDTH, consts::HEIGHT);
+    screen.setFps(consts::FPS);
 
-    sf::Texture text;
-    text.loadFromFile("res/img/nose.png");
+    screen.regCallBack(sf::Event::Closed, [&](sf::Event e) {
+        screen.window().close();
+    });
 
-    sf::Sprite spr;
-    spr.setTexture(text);
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
+    screen.regCallBack(sf::Event::KeyPressed, [&](sf::Event e) {
+        std::cout << e.key.code<< std::endl;
+    });
+
+    screen.regCallBack(sf::Event::KeyPressed, [&](sf::Event e) {
+        if(e.key.code == sf::Keyboard::Escape) {
+            screen.window().close();
         }
+    });
+    
+    Image img(50, 50, 300, 300, "res/img/ilka.jpg");
 
-        window.clear();
-        window.draw(spr);
-        window.display();
+    Button btn(300,300, 200, 50, "Giga peniszxsssss");
+    btn.setColorFace(sf::Color::Yellow);
 
-
-        ////
+    while (screen.isOpen()) {
+        screen.processEvents();
+        screen.window().clear(sf::Color::White);
+        img.draw(screen);
+        btn.draw(screen);
+        screen.window().display();
     }
-
     return 0;
 }
